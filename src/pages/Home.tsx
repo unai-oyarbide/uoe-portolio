@@ -1,11 +1,14 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
+import { projects } from '../data/projects';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
   const container = useRef(null);
+  const featuredProjects = projects.slice(0, 4);
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
@@ -73,37 +76,25 @@ const Home = () => {
       {/* Project Gallery */}
       <section style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '10rem' }}>
         
-        {/* Project 1 */}
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <div style={{ width: '60%', height: '80vh', overflow: 'hidden' }}>
-            <img className="img-parallax" src="/brutalist_interior_1.png" alt="Project 1" style={{ width: '100%', height: '120%', objectFit: 'cover', marginTop: '-10%' }} />
-          </div>
-          <div className="reveal-text" style={{ width: '40%' }}>
-            <h3 style={{ fontSize: '3rem' }}>01 / THE CONCRETE HOUSE</h3>
-            <p style={{ marginTop: '1rem', fontSize: '1.1rem', opacity: 0.7 }}>A stark exploration of light and shadow.</p>
-          </div>
-        </div>
+        {featuredProjects.map((proj, index) => {
+          const isEven = index % 2 === 0;
+          return (
+            <div key={proj.id} style={{ display: 'flex', gap: '2rem', alignItems: 'center', flexDirection: isEven ? 'row' : 'row-reverse' }}>
+              <div style={{ width: isEven ? '60%' : '50%', height: isEven ? '80vh' : '70vh', overflow: 'hidden', backgroundColor: '#111' }}>
+                <img className="img-parallax" src={proj.image} alt={proj.title} style={{ width: '100%', height: '120%', objectFit: 'cover', marginTop: '-10%', filter: 'grayscale(15%)' }} />
+              </div>
+              <div className="reveal-text" style={{ width: isEven ? '40%' : '50%', textAlign: isEven ? 'left' : 'right' }}>
+                <h3 style={{ fontSize: '3rem' }}>0{index + 1} / {proj.title}</h3>
+                <p style={{ marginTop: '1rem', fontSize: '1.1rem', opacity: 0.7, fontFamily: 'monospace' }}>{proj.description}</p>
+              </div>
+            </div>
+          );
+        })}
 
-        {/* Project 2 */}
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center', flexDirection: 'row-reverse' }}>
-          <div style={{ width: '50%', height: '70vh', overflow: 'hidden' }}>
-            <img className="img-parallax" src="/elegant_interior_2.png" alt="Project 2" style={{ width: '100%', height: '120%', objectFit: 'cover', marginTop: '-10%' }} />
-          </div>
-          <div className="reveal-text" style={{ width: '50%', textAlign: 'right' }}>
-            <h3 style={{ fontSize: '3rem' }}>02 / MONOLITHIC RESIDENCE</h3>
-            <p style={{ marginTop: '1rem', fontSize: '1.1rem', opacity: 0.7 }}>Monumental scale meets elegant design.</p>
-          </div>
-        </div>
-
-        {/* Project 3 */}
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-          <div className="reveal-text" style={{ width: '30%', paddingTop: '10rem' }}>
-            <h3 style={{ fontSize: '3rem' }}>03 / GLASS PAVILION</h3>
-            <p style={{ marginTop: '1rem', fontSize: '1.1rem', opacity: 0.7 }}>Groundbreaking modernism in nature.</p>
-          </div>
-          <div style={{ width: '70%', height: '90vh', overflow: 'hidden' }}>
-            <img className="img-parallax" src="/minimalist_interior_3.png" alt="Project 3" style={{ width: '100%', height: '120%', objectFit: 'cover', marginTop: '-10%' }} />
-          </div>
+        <div style={{ display: 'flex', justifyContent: 'center', padding: '5rem 0' }}>
+           <Link to="/projects" className="reveal-text uppercase" style={{ fontSize: '2rem', textDecoration: 'underline' }}>
+             VIEW ALL 18 PROJECTS →
+           </Link>
         </div>
 
       </section>

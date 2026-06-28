@@ -40,7 +40,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         zIndex: 100
       }}>
         <Link to="/" style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#fff' }}>UOE</Link>
-        <Link to="/login" style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#fff' }}>CLIENT LOGIN</Link>
+        <div style={{ display: 'flex', gap: '2rem' }}>
+          <Link to="/projects" style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#fff' }}>PROJECTS</Link>
+          <Link to="/login" style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#fff' }}>CLIENT LOGIN</Link>
+        </div>
       </nav>
       
       <main>
