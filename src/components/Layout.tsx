@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect, ReactNode } from 'react';
 import Lenis from '@studio-freight/lenis';
 import { Link } from 'react-router-dom';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -11,8 +11,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
     });
 
     function raf(time: number) {
