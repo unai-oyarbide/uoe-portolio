@@ -1,4 +1,4 @@
-import { useEffect, ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import Lenis from '@studio-freight/lenis';
 import { Link } from 'react-router-dom';
 
